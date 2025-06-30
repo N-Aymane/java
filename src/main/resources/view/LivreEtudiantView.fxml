@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controller.LivreEtudiantController"
+            prefWidth="1000" prefHeight="700"
+            style="-fx-background-color: linear-gradient(to bottom, #4a9b5e, #2d7a3f);">
+
+    <!-- Header -->
+    <top>
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding: 25 20 20 20;">
+            <!-- Logo et titre -->
+            <HBox alignment="CENTER" spacing="10">
+                <Rectangle width="35" height="35"
+                           style="-fx-fill: white; -fx-arc-width: 8; -fx-arc-height: 8;"/>
+                <VBox alignment="CENTER_LEFT">
+                    <Label text="BIBLIOTHÈQUE EMSI"
+                           style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <Label text="Système de Gestion"
+                           style="-fx-text-fill: white; -fx-font-size: 11px;"/>
+                </VBox>
+            </HBox>
+
+            <Label text="📚 Catalogue des Livres Disponibles"
+                   style="-fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold;"/>
+
+            <Label text="Sélectionnez un livre pour l'emprunter"
+                   style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 14px;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 20;">
+
+            <!-- Barre de recherche -->
+            <HBox fx:id="searchBox" maxWidth="800" spacing="15" alignment="CENTER"
+                  style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0.3, 0, 2);">
+                <Label text="🔍" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="searchField" promptText="Rechercher par titre, auteur ou éditeur..."
+                           style="-fx-border-color: transparent; -fx-background-color: transparent; -fx-font-size: 14px;"
+                           HBox.hgrow="ALWAYS"/>
+                <Button text="Rechercher" onAction="#handleSearch"
+                        style="-fx-background-color: #4a9b5e; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 20; -fx-background-radius: 6;"/>
+            </HBox>
+
+            <!-- Conteneur principal de la table -->
+            <VBox maxWidth="900"
+                  style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.3, 0, 2); -fx-padding: 25;">
+
+                <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 0 0 20 0;">
+                    <Circle radius="20" style="-fx-fill: linear-gradient(to bottom, #4a9b5e, #2d7a3f);"/>
+                    <VBox>
+                        <Label text="Liste des Ouvrages"
+                               style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2d7a3f;"/>
+                        <Label text="Cliquez sur un livre pour voir les détails"
+                               style="-fx-font-size: 12px; -fx-text-fill: #666666;"/>
+                    </VBox>
+                </HBox>
+
+                <Separator style="-fx-background-color: #e0e0e0;"/>
+
+                <TableView fx:id="livreTable" prefHeight="400"
+                           style="-fx-background-color: transparent; -fx-padding: 15 0 0 0;">
+                    <columns>
+                        <TableColumn fx:id="titreColumn" text="📖 Titre" prefWidth="220" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="auteurColumn" text="✍️ Auteur" prefWidth="160" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="editeurColumn" text="🏢 Éditeur" prefWidth="140" style="-fx-alignment: CENTER_LEFT;"/>
+                        <TableColumn fx:id="anneeColumn" text="📅 Année" prefWidth="90" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="disponibleColumn" text="✅ Disponible" prefWidth="100" style="-fx-alignment: CENTER;"/>
+                    </columns>
+                </TableView>
+
+                <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                    <Label text="💡" style="-fx-font-size: 16px;"/>
+                    <Label text="Astuce : Double-cliquez sur un livre pour voir plus de détails"
+                           style="-fx-text-fill: #666666; -fx-font-size: 12px;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="📤 Emprunter le Livre Sélectionné"
+                        onAction="#handleEmprunter"
+                        style="-fx-background-color: white; -fx-text-fill: #2d7a3f; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 12 25; -fx-background-radius: 8; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 6, 0.3, 0, 2); -fx-cursor: hand;"/>
+
+                <Button text="◀️ Retour au Dashboard"
+                        onAction="#handleRetour"
+                        style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 20; -fx-background-radius: 8; -fx-border-color: white; -fx-border-width: 1; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

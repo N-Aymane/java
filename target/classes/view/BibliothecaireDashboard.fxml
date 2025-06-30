@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controller.BibliothecaireController"
+            prefWidth="1400" prefHeight="900"
+            style="-fx-background-color: linear-gradient(to bottom, #4a9b5e, #2d7a3f);">
+
+    <!-- Header -->
+    <top>
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 30 25 25 25;">
+            <HBox alignment="CENTER" spacing="15">
+                <Rectangle width="45" height="45"
+                           style="-fx-fill: white; -fx-arc-width: 12; -fx-arc-height: 12;"/>
+                <VBox alignment="CENTER_LEFT">
+                    <Label text="ADMINISTRATION EMSI"
+                           style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label text="Interface Bibliothécaire"
+                           style="-fx-text-fill: rgba(255,255,255,0.9); -fx-font-size: 12px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="⛶ Plein Écran" onAction="#toggleFullScreen"
+                        style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-background-radius: 20;"/>
+                <Button text="🔓 Déconnexion" onAction="#handleLogout"
+                        style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-background-radius: 20;"/>
+            </HBox>
+            <VBox alignment="CENTER">
+                <Label text="🏛️ Tableau de Bord Bibliothécaire"
+                       style="-fx-text-fill: white; -fx-font-size: 32px; -fx-font-weight: bold;"/>
+                <Label text="Gérez l'inventaire des livres et les emprunts"
+                       style="-fx-text-fill: rgba(255,255,255,0.85); -fx-font-size: 15px;"/>
+            </VBox>
+        </VBox>
+    </top>
+
+    <!-- Centre -->
+    <center>
+        <VBox spacing="30" style="-fx-padding: 35 30 30 30;">
+
+            <!-- Section gestion des livres -->
+            <VBox spacing="20" style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 18; -fx-padding: 25; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0, 0, 5);">
+                <Label text="📚 Gestion des Livres"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-padding: 0 0 5 0;"/>
+
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <TextField fx:id="titreField" promptText="Titre" prefWidth="170"
+                               style="-fx-background-color: #f8f9fa; -fx-background-radius: 8; -fx-border-color: #e9ecef; -fx-border-radius: 8; -fx-padding: 10; -fx-font-size: 13px;"/>
+                    <TextField fx:id="auteurField" promptText="Auteur" prefWidth="170"
+                               style="-fx-background-color: #f8f9fa; -fx-background-radius: 8; -fx-border-color: #e9ecef; -fx-border-radius: 8; -fx-padding: 10; -fx-font-size: 13px;"/>
+                    <TextField fx:id="editeurField" promptText="Éditeur" prefWidth="170"
+                               style="-fx-background-color: #f8f9fa; -fx-background-radius: 8; -fx-border-color: #e9ecef; -fx-border-radius: 8; -fx-padding: 10; -fx-font-size: 13px;"/>
+                    <TextField fx:id="anneeField" promptText="Année" prefWidth="110"
+                               style="-fx-background-color: #f8f9fa; -fx-background-radius: 8; -fx-border-color: #e9ecef; -fx-border-radius: 8; -fx-padding: 10; -fx-font-size: 13px;"/>
+                    <TextField fx:id="nombreExemplairesField" promptText="Exemplaires" prefWidth="130"
+                               style="-fx-background-color: #f8f9fa; -fx-background-radius: 8; -fx-border-color: #e9ecef; -fx-border-radius: 8; -fx-padding: 10; -fx-font-size: 13px;"/>
+                </HBox>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Button text="➕ Ajouter" onAction="#ajouterLivre"
+                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-font-weight: bold; -fx-font-size: 13px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2); -fx-cursor: hand;"/>
+                    <Button text="✏️ Modifier" onAction="#modifierLivre"
+                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-font-weight: bold; -fx-font-size: 13px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2); -fx-cursor: hand;"/>
+                    <Button text="🗑️ Supprimer" onAction="#supprimerLivre"
+                            style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-font-weight: bold; -fx-font-size: 13px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2); -fx-cursor: hand;"/>
+                </HBox>
+                <TableView fx:id="livreTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="titreColumn" text="📖 Titre" prefWidth="220"/>
+                        <TableColumn fx:id="auteurColumn" text="✍️ Auteur" prefWidth="180"/>
+                        <TableColumn fx:id="editeurColumn" text="🏢 Éditeur" prefWidth="160"/>
+                        <TableColumn fx:id="anneeColumn" text="📅 Année" prefWidth="100"/>
+                        <TableColumn fx:id="nombreExemplairesColumn" text="📚 Stock" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Section des emprunts -->
+            <VBox spacing="15" style="-fx-background-color: white; -fx-background-radius: 15; -fx-padding: 25;">
+                <Label text="📋 Livres Empruntés"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TableView fx:id="empruntTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="idEmpruntColumn" text="🆔 ID" prefWidth="60"/>
+                        <TableColumn fx:id="titreEmpruntColumn" text="📖 Titre" prefWidth="250"/>
+                        <TableColumn fx:id="emprunteurColumn" text="👤 Étudiant" prefWidth="180"/>
+                        <TableColumn fx:id="emailEmprunteurColumn" text="📧 Email" prefWidth="200"/>
+                        <TableColumn fx:id="dateEmpruntColumn" text="📅 Date Emprunt" prefWidth="130"/>
+                        <TableColumn fx:id="dateRetourColumn" text="🗓️ Retour Prévu" prefWidth="130"/>
+                        <TableColumn fx:id="statutEmpruntColumn" text="📊 Statut" prefWidth="120"/>
+                        <TableColumn fx:id="retardColumn" text="⚠️ Retard" prefWidth="80"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </VBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 20;">
+            <Label text="© 2025 EMSI - Interface Bibliothécaire"
+                   style="-fx-text-fill: rgba(255,255,255,0.8); -fx-font-size: 11px;"/>
+        </HBox>
+    </bottom>
+</BorderPane>

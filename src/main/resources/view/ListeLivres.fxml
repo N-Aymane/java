@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="Controller.BibliothecaireController"
+            prefWidth="900" prefHeight="600" style="-fx-background-color: #f9f9f9;">
+
+    <top>
+        <Label text="📚 Liste des livres"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 20;"
+               BorderPane.alignment="CENTER"/>
+    </top>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 20;">
+            <TableView fx:id="livreTable" prefHeight="300">
+                <columns>
+                    <TableColumn fx:id="titreColumn" text="Titre" prefWidth="150"/>
+                    <TableColumn fx:id="auteurColumn" text="Auteur" prefWidth="120"/>
+                    <TableColumn fx:id="editeurColumn" text="Éditeur" prefWidth="120"/>
+                    <TableColumn fx:id="anneeColumn" text="Année" prefWidth="80"/>
+                    <TableColumn fx:id="nombreExemplairesColumn" text="Exemplaires" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <GridPane hgap="10" vgap="10">
+                <Label text="Titre :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="titreField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Auteur :" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                <TextField fx:id="auteurField" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                <Label text="Éditeur :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="editeurField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Année :" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                <TextField fx:id="anneeField" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                <Label text="Exemplaires :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="nombreExemplairesField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+            <Button text="Ajouter" onAction="#ajouterLivre"
+                    style="-fx-background-color: #2E8B57; -fx-text-fill: white; -fx-padding: 8 16; -fx-background-radius: 6;"/>
+            <Button text="Modifier" onAction="#modifierLivre"
+                    style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-padding: 8 16; -fx-background-radius: 6;"/>
+            <Button text="Supprimer" onAction="#supprimerLivre"
+                    style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-padding: 8 16; -fx-background-radius: 6;"/>
+        </HBox>
+    </bottom>
+
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 20;">
+            <Label text="© 2025 École Marocaine des Sciences de l'Ingénieur - Système de Gestion Bibliothèque"
+                   style="-fx-text-fill: rgba(255,255,255,0.8); -fx-font-size: 11px;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
